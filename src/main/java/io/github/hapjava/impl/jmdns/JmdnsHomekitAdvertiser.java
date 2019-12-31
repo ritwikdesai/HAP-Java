@@ -1,5 +1,6 @@
 package io.github.hapjava.impl.jmdns;
 
+import io.github.hapjava.impl.HomekitUtils;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -21,6 +22,7 @@ public class JmdnsHomekitAdvertiser {
 
   private String label;
   private String mac;
+  private String setupKey;
   private int port;
   private int configurationIndex;
 
@@ -28,13 +30,15 @@ public class JmdnsHomekitAdvertiser {
     jmdns = JmDNS.create(localAddress);
   }
 
-  public synchronized void advertise(String label, String mac, int port, int configurationIndex)
+  public synchronized void advertise(
+      String label, String mac, String setupKey, int port, int configurationIndex)
       throws Exception {
     if (isAdvertising) {
       throw new IllegalStateException("Homekit advertiser is already running");
     }
     this.label = label;
     this.mac = mac;
+    this.setupKey = setupKey;
     this.port = port;
     this.configurationIndex = configurationIndex;
 
@@ -88,6 +92,7 @@ public class JmdnsHomekitAdvertiser {
     props.put("s#", "1");
     props.put("ff", "0");
     props.put("ci", "1");
+    props.put("sh", HomekitUtils.generateSetupHash(setupKey, mac));
     jmdns.registerService(ServiceInfo.create(SERVICE_TYPE, label, port, 1, 1, props));
   }
 }

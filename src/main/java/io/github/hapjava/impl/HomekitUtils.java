@@ -3,11 +3,17 @@ package io.github.hapjava.impl;
 import com.nimbusds.srp6.SRP6Routines;
 import java.math.BigInteger;
 import java.security.InvalidAlgorithmParameterException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.util.Arrays;
+import java.util.Base64;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import net.i2p.crypto.eddsa.spec.EdDSANamedCurveTable;
 import net.i2p.crypto.eddsa.spec.EdDSAParameterSpec;
+import org.apache.commons.lang3.RandomUtils;
+import org.apache.commons.lang3.StringUtils;
 
 public class HomekitUtils {
 
@@ -71,5 +77,22 @@ public class HomekitUtils {
       }
     }
     return secureRandom;
+  }
+
+  public static String generateSetupKey() {
+    int keyValue = RandomUtils.nextInt(0, 1679616);
+    return StringUtils.leftPad(Integer.toString(keyValue, 36).toUpperCase(), 4, "0");
+  }
+
+  public static String generateSetupHash(String setupKey, String mac) {
+    String hashMaterial = setupKey + mac;
+    try {
+      MessageDigest md = MessageDigest.getInstance("SHA-512");
+      byte[] hash = md.digest(hashMaterial.getBytes());
+      byte[] hashToEncode = Arrays.copyOfRange(hash, 0, 4);
+      return Base64.getEncoder().encodeToString(hashToEncode);
+    } catch (NoSuchAlgorithmException e) {
+    }
+    return "";
   }
 }

@@ -65,9 +65,11 @@ public class HomekitRootTest {
   @Test
   public void testAdvertiserStarts() throws Exception {
     String mac = "00:00:00:00:00:00";
+    String setupKey = "LZQT";
     when(authInfo.getMac()).thenReturn(mac);
+    when(authInfo.getSetupKey()).thenReturn(setupKey);
     root.start();
-    verify(advertiser).advertise(eq(LABEL), eq(mac), eq(PORT), eq(1));
+    verify(advertiser).advertise(eq(LABEL), eq(mac), eq(setupKey), eq(PORT), eq(1));
   }
 
   @Test

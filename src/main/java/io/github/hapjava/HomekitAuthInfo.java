@@ -85,4 +85,11 @@ public interface HomekitAuthInfo {
   default boolean hasUser() {
     return false;
   };
+
+  /**
+   * A four character setup key used by setup hash for enhanced accessory setup
+   *
+   * @return the setup key
+   */
+  String getSetupKey();
 }
