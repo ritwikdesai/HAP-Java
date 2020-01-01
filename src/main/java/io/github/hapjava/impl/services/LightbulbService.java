@@ -1,9 +1,9 @@
 package io.github.hapjava.impl.services;
 
+import io.github.hapjava.accessories.ColorTemperatureLightBulb;
 import io.github.hapjava.accessories.ColorfulLightbulb;
 import io.github.hapjava.accessories.DimmableLightbulb;
 import io.github.hapjava.accessories.Lightbulb;
-import io.github.hapjava.accessories.ColorTemperatureLightBulb;
 import io.github.hapjava.impl.characteristics.common.PowerStateCharacteristic;
 import io.github.hapjava.impl.characteristics.lightbulb.BrightnessCharacteristic;
 import io.github.hapjava.impl.characteristics.lightbulb.ColorTemperatureCharacteristic;

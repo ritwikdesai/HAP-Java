@@ -33,4 +33,18 @@ public interface ColorTemperatureLightBulb extends Lightbulb {
 
   /** Unsubscribes from changes in the temperature of the light. */
   void unsubscribeTemperature();
+
+  /**
+   * Returns the min temperature supported by the light bulb
+   *
+   * @return temperature in (MK-1)
+   */
+  int getMinTemperature();
+
+  /**
+   * Returns the max temperature supported by the light bulb
+   *
+   * @return temperature in (MK-1)
+   */
+  int getMaxTemperature();
 }
