@@ -35,16 +35,16 @@ public interface ColorTemperatureLightBulb extends Lightbulb {
   void unsubscribeTemperature();
 
   /**
-   * Returns the min temperature supported by the light bulb
+   * Returns the min value supported by the light bulb in mirek scale
    *
    * @return temperature in (MK-1)
    */
-  int getMinTemperature();
+  int getMinValue();
 
   /**
-   * Returns the max temperature supported by the light bulb
+   * Returns the max value supported by the light bulb in mirek scale
    *
    * @return temperature in (MK-1)
    */
-  int getMaxTemperature();
+  int getMaxValue();
 }

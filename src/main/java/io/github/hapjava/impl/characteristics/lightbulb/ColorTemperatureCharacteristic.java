@@ -17,8 +17,8 @@ public class ColorTemperatureCharacteristic extends IntegerCharacteristic
         true,
         true,
         "Adjust temperature of the light",
-        50,
-        400,
+        lightBulb.getMinValue() < 50 ? 50 : lightBulb.getMinValue(),
+        lightBulb.getMaxValue() > 400 ? 400 : lightBulb.getMaxValue(),
         "");
     this.lightBulb = lightBulb;
   }
